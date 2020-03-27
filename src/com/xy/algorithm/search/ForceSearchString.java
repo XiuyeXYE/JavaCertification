@@ -58,7 +58,8 @@ public class ForceSearchString {
 
 		return idx;
 
-	}
+	}	
+	
 
 	public static void main(String[] args) {
 		String str = "JavaABCDDD,国中人";
