@@ -27,8 +27,8 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.UUID;
 
-import com.xiuye.util.cls.TypeUtil;
-import com.xiuye.util.log.LogUtil;
+import com.xiuye.util.cls.XType;
+import com.xiuye.util.log.XLog;
 
 public class CertDev3 {
 
@@ -39,10 +39,10 @@ public class CertDev3 {
 		ks.load(null, "123456".toCharArray());
 
 		KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
-		LogUtil.log(kpg);
+		XLog.log(kpg);
 
 		kpg.initialize(2048);
-		LogUtil.log(kpg);
+		XLog.log(kpg);
 
 		KeyPair keyPair = kpg.generateKeyPair();
 		// [48, -126, 4, -67, 2, 1, 0, 48, 13, 6, 9, 42, -122, 72, -122, -9, 13, 1, 1,
@@ -195,19 +195,19 @@ public class CertDev3 {
 		// -69, -48, 68, 127, 127, 76, -7, -105, -114, 125, -68, 89, -68, -109, 123,
 		// -11, -26, -95, 99, -2, 38, 54, -5, 17, 91, 30, 114]
 		PrivateKey privateKey = keyPair.getPrivate();
-		LogUtil.log(privateKey.getAlgorithm());
+		XLog.log(privateKey.getAlgorithm());
 		byte[] privateKeyData = privateKey.getEncoded();
-		List<Byte> privateKeyDataList = TypeUtil.createList();
+		List<Byte> privateKeyDataList = XType.list();
 		for (byte b : privateKeyData) {
 			privateKeyDataList.add(b);
 		}
-		LogUtil.log(privateKeyDataList);
-		LogUtil.log(privateKey.getFormat());
+		XLog.log(privateKeyDataList);
+		XLog.log(privateKey.getFormat());
 
 		PublicKey publicKey = keyPair.getPublic();
-		LogUtil.log(publicKey.getAlgorithm());
+		XLog.log(publicKey.getAlgorithm());
 		byte[] publicKeyData = privateKey.getEncoded();
-		List<Byte> publicKeyDataList = TypeUtil.createList();
+		List<Byte> publicKeyDataList = XType.list();
 		for (byte b : publicKeyData) {
 			publicKeyDataList.add(b);
 		}
@@ -359,17 +359,17 @@ public class CertDev3 {
 		// -34, -65, -89, -9, 19, 104, -11, 98, 119, -86, 16, -55, 66, -35, 16, -13,
 		// -124, -79, 18, -89, 16, -10, -50, 47, 34, 96, 68, -20, 123, 120, -89, -84,
 		// 54, 78, 40, 23, 6, 64, 112, 22, 111, -59, 82, -75, -92, -21, 30, 93, -28]
-		LogUtil.log(publicKeyDataList);
-		LogUtil.log(publicKey.getFormat());
+		XLog.log(publicKeyDataList);
+		XLog.log(publicKey.getFormat());
 
 		X509CertInfo xci = new X509CertInfo();
 
 		ks.setKeyEntry("证书例子", privateKey, "123456".toCharArray(), new X509Certificate[] { xci });
 
-		LogUtil.log(ks.getType());
-		LogUtil.log(ks.getProvider());
-		LogUtil.log(ks.aliases());
-		LogUtil.log(Collections.list(ks.aliases()));
+		XLog.log(ks.getType());
+		XLog.log(ks.getProvider());
+		XLog.log(ks.aliases());
+		XLog.log(Collections.list(ks.aliases()));
 
 		ks.store(new FileOutputStream("demo.keystore"), "12".toCharArray());
 	}

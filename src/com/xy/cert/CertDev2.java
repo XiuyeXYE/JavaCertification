@@ -24,14 +24,14 @@ import java.util.Date;
 
 import javax.security.auth.x500.X500Principal;
 
-import com.xiuye.util.log.LogUtil;
+import com.xiuye.util.log.XLog;
 
 public class CertDev2 {
 
 	public static void main(String[] args) throws NoSuchAlgorithmException, KeyStoreException, IOException,
 			CertPathBuilderException, InvalidAlgorithmParameterException, CertificateException, CertStoreException {
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
-		LogUtil.log(new String(md.digest()));
+		XLog.log(new String(md.digest()));
 
 		// create CertPathBuilder that implements the "PKIX" algorithm
 		CertPathBuilder cpb = null;
@@ -39,7 +39,7 @@ public class CertDev2 {
 		// build certification path using specified parameters ("params")
 		KeyStore ks = KeyStore.getInstance("pkcs12");
 		ks.load(null, "123456".toCharArray());
-		LogUtil.log(ks);
+		XLog.log(ks);
 
 		CollectionCertStoreParameters ccsp = new CollectionCertStoreParameters();
 		CertStore cs = CertStore.getInstance("Collection", ccsp);
@@ -66,10 +66,10 @@ public class CertDev2 {
 		// an RFC822Name)
 		xcs.addSubjectAlternativeName(1, "alice@xyz.example.com");
 
-		LogUtil.log(xcs);
+		XLog.log(xcs);
 
 		Collection<? extends Certificate> certs = cs.getCertificates(xcs);
-		LogUtil.log(certs);
+		XLog.log(certs);
 //		ks.setCertificateEntry("基明", certs.iterator().next());
 		
 		PKIXBuilderParameters params = new PKIXBuilderParameters(ks, xcs);
